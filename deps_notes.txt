@@ -1,0 +1,4 @@
+boot_olympics:
+    needs vehicles but only for special operatiosn.
+    shoudl install without dep -- to test
+    
