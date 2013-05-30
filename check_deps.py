@@ -33,8 +33,7 @@ def load_packages():
         use.append(p)
     return use
 
-def load_packages_multi():
-    root = '..'
+def load_packages_multi(root = '../..'):
 
     f = join(root, 'resources.yaml')
     pkgs =  list(yaml.load_all(open(f)))

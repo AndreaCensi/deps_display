@@ -1,258 +1,467 @@
 astatsa:
   id_package: astatsa
   repo: astatsa
-  required_by: [boot_agents, bootstrapping_olympics]
+  required_by: [diffeo2d, boot_agents, bootstrapping_olympics]
   requires: [contracts]
-  src: ../src/astatsa/src/astatsa
+  src: ../../src/astatsa/src/astatsa
+b2r2b_youbot:
+  id_package: b2r2b_youbot
+  repo: rosstream2boot
+  required_by: []
+  requires: [rosstream2boot, contracts, bootstrapping_olympics]
+  src: ../../src/rosstream2boot/src/b2r2b_youbot
+blocks:
+  id_package: blocks
+  repo: boot_olympics
+  required_by: [bootstrapping_olympics, procgraph_foo]
+  requires: [typsy_dynamics, contracts, typsy]
+  src: ../../src/boot_olympics/src/blocks
 boot_agents:
   id_package: boot_agents
   repo: boot_agents
-  required_by: [boot_reports, learner, diffeoplan]
-  requires: [reprep, astatsa, procgraph, compmake, contracts, diffeoplan, bootstrapping_olympics,
-    geometry, vehicles, procgraph_ros, conf_tools, procgraph_images]
-  src: ../src/boot_agents/src/boot_agents
-boot_gui:
-  id_package: boot_gui
-  repo: vehicles
-  required_by: []
-  requires: [bootstrapping_olympics, vehicles]
-  src: ../src/vehicles/src/boot_gui
+  required_by: [boot_reports, procgraph_diffeo, yc1304, diffeoplan_agent, diffeo2d,
+    diffeo_agents, learner, diffeo2dds, diffeoplan]
+  requires: [reprep, astatsa, contracts, bootstrapping_olympics, geometry, conf_tools]
+  src: ../../src/boot_agents/src/boot_agents
 boot_reports:
   id_package: boot_reports
   repo: boot_agents
   required_by: []
-  requires: [reprep, contracts, boot_agents, bootstrapping_olympics, geometry, vehicles,
-    latex_gen]
-  src: ../src/boot_agents/src/boot_reports
-boot_servo:
-  id_package: boot_servo
-  repo: boot_servo_demo
-  required_by: []
-  requires: []
-  src: ../src/boot_servo_demo/src/boot_servo
+  requires: [reprep, contracts, boot_agents, bootstrapping_olympics, vehicles, latex_gen]
+  src: ../../src/boot_agents/src/boot_reports
 bootstrapping_olympics:
   id_package: bootstrapping_olympics
   repo: boot_olympics
-  required_by: [boot_reports, vehicles_boot, boot_gui, learner, rosstream2boot, boot_agents,
-    diffeoplan, vehicles]
-  requires: [reprep, procgraph_hdf, astatsa, procgraph_vehicles, procgraph, compmake,
-    vehicles_cairo, contracts, geometry, vehicles, procgraph_ros, conf_tools]
-  src: ../src/boot_olympics/src/bootstrapping_olympics
+  required_by: [boot_reports, procgraph_diffeo, yc1304, diffeoplan_agent, diffeo2d_learn,
+    vehicles_boot, diffeo2c, procgraph_b2r2b, diffeo2d, diffeo_agents, learner, quickapp_boot,
+    rosstream2boot, diffeo2dds, b2r2b_youbot, boot_agents, procgraph_boot, diffeoplan,
+    vehicles, diffeo2dds_sim]
+  requires: [reprep, procgraph_hdf, astatsa, blocks, procgraph_vehicles, procgraph,
+    compmake, vehicles_cairo, contracts, geometry, vehicles, procgraph_ros, conf_tools]
+  src: ../../src/boot_olympics/src/bootstrapping_olympics
 cairo_utils:
   id_package: cairo_utils
   repo: vehicles
   required_by: [procgraph_vehicles, vehicles_cairo]
   requires: [contracts]
-  src: ../src/vehicles/src/cairo_utils
+  src: ../../src/vehicles/src/cairo_utils
 compmake:
   id_package: compmake
   repo: compmake
-  required_by: [learner, quickapp, boot_agents, diffeoplan, bootstrapping_olympics,
-    conf_tools]
+  required_by: [yc1304, diffeo2d, learner, quickapp, diffeo2dds, misc, diffeoplan,
+    bootstrapping_olympics]
   requires: [contracts]
-  src: ../src/compmake/src/compmake
+  src: ../../src/compmake/src/compmake
+comptests:
+  id_package: comptests
+  repo: quickapp
+  required_by: []
+  requires: [quickapp, conf_tools]
+  src: ../../src/quickapp/src/comptests
 conf_tools:
   id_package: conf_tools
   repo: conf_tools
-  required_by: [learner, quickapp, vehicles_cairo, rosstream2boot, boot_agents, diffeoplan,
-    bootstrapping_olympics, vehicles, procgraph_images]
+  required_by: [procgraph_diffeo, yc1304, dptr1, diffeoplan_agent, diffeo2d_learn,
+    diffeo2s, diffeo2d, rosbag_utils, learner, quickapp, comptests, vehicles_cairo,
+    rosstream2boot, diffeo2dds, diffeo2dds_learn, boot_agents, diffeoplan, bootstrapping_olympics,
+    vehicles, diffeo2dds_learn_rosbag, diffeo, procgraph_images]
   requires: [contracts]
-  src: ../src/conf_tools/src/conf_tools
+  src: ../../src/conf_tools/src/conf_tools
 contracts:
   id_package: contracts
   repo: contracts
-  required_by: [boot_reports, reprep, astatsa, vehicles_boot, ggs, learner, procgraph,
-    quickapp, compmake, procgraph_mplayer, vehicles_cairo, cairo_utils, rosstream2boot,
-    boot_agents, diffeoplan, bootstrapping_olympics, geometry, vehicles, procgraph_ros,
-    contracts-py3k-test, latex_gen, conf_tools, procgraph_images, raytracer]
-  requires: []
-  src: ../src/contracts/src/contracts
+  required_by: [boot_reports, procgraph_diffeo, typsy_boot, yc1304, reprep, diffeoplan_agent,
+    diffeo2d_learn, astatsa, blocks, vehicles_boot, diffeo2c, diffeo2s, procgraph_b2r2b,
+    diffeo2d, rosbag_utils, diffeo_agents, learner, procgraph, quickapp, compmake,
+    decent_params, quickapp_boot, ggs, procgraph_mplayer, vehicles_cairo, cairo_utils,
+    rosstream2boot, diffeo2dds, diffeo2dds_learn, typsy_configuration, b2r2b_youbot,
+    boot_agents, procgraph_boot, genblocks, diffeoplan, bootstrapping_olympics, geometry,
+    typsy_geometry, vehicles, diffeo2dds_sim, procgraph_ros, contracts-py3k-test,
+    typsy, diffeo2dds_learn_rosbag, latex_gen, conf_tools, procgraph_images, raytracer]
+  requires: [misc]
+  src: ../../src/contracts/src/contracts
 contracts-py3k-test:
   id_package: contracts-py3k-test
   repo: contracts
   required_by: []
   requires: [contracts]
-  src: ../src/contracts/src/contracts-py3k-test
+  src: ../../src/contracts/src/contracts-py3k-test
+decent_params:
+  id_package: decent_params
+  repo: quickapp
+  required_by: [quickapp]
+  requires: [contracts]
+  src: ../../src/quickapp/src/decent_params
+diffeo:
+  id_package: diffeo
+  repo: diffeo
+  required_by: [procgraph_diffeo, dptr1, diffeoplan_agent, diffeo2d_learn, diffeo2c,
+    diffeo2s, diffeo2d, diffeo_agents, learner, diffeo2dds, diffeo2dds_learn, misc,
+    diffeoplan, diffeo2dds_sim, diffeo2dds_learn_rosbag]
+  requires: [diffeo2s, diffeo2d, quickapp, diffeo2dds, diffeo2dds_learn, conf_tools]
+  src: ../../src/diffeo/src/diffeo
+diffeo2c:
+  id_package: diffeo2c
+  repo: diffeo
+  required_by: [diffeo2d_learn, diffeo2d]
+  requires: [diffeo2d, contracts, bootstrapping_olympics, diffeo]
+  src: ../../src/diffeo/src/diffeo2c
+diffeo2d:
+  id_package: diffeo2d
+  repo: diffeo
+  required_by: [procgraph_diffeo, dptr1, diffeo2d_learn, diffeo2c, diffeo2s, diffeo_agents,
+    diffeo2dds, diffeo2dds_learn, diffeoplan, diffeo2dds_sim, diffeo2dds_learn_rosbag,
+    diffeo]
+  requires: [reprep, astatsa, diffeo2c, diffeo2s, compmake, contracts, boot_agents,
+    bootstrapping_olympics, geometry, diffeo, conf_tools]
+  src: ../../src/diffeo/src/diffeo2d
+diffeo2d_learn:
+  id_package: diffeo2d_learn
+  repo: diffeo
+  required_by: [diffeo2dds_learn]
+  requires: [reprep, diffeo2c, diffeo2d, contracts, bootstrapping_olympics, diffeo,
+    conf_tools]
+  src: ../../src/diffeo/src/diffeo2d_learn
+diffeo2dds:
+  id_package: diffeo2dds
+  repo: diffeo
+  required_by: [dptr1, diffeo_agents, diffeo2dds_learn, diffeoplan, diffeo2dds_sim,
+    diffeo2dds_learn_rosbag, diffeo]
+  requires: [reprep, procgraph_pil, diffeo2s, diffeo2d, procgraph, quickapp, compmake,
+    contracts, boot_agents, diffeoplan, bootstrapping_olympics, geometry, vehicles,
+    diffeo, conf_tools]
+  src: ../../src/diffeo/src/diffeo2dds
+diffeo2dds_learn:
+  id_package: diffeo2dds_learn
+  repo: diffeo
+  required_by: [dptr1, diffeo_agents, diffeoplan, diffeo2dds_sim, diffeo2dds_learn_rosbag,
+    diffeo]
+  requires: [reprep, diffeo2d_learn, diffeo2d, procgraph, quickapp, diffeo2dds, contracts,
+    procgraph_cv, diffeo, conf_tools]
+  src: ../../src/diffeo/src/diffeo2dds_learn
+diffeo2dds_learn_rosbag:
+  id_package: diffeo2dds_learn_rosbag
+  repo: diffeo
+  required_by: []
+  requires: [diffeo2d, ros_node_utils, diffeo2dds, diffeo2dds_learn, contracts, diffeo,
+    conf_tools]
+  src: ../../src/diffeo/src/diffeo2dds_learn_rosbag
+diffeo2dds_sim:
+  id_package: diffeo2dds_sim
+  repo: diffeo
+  required_by: []
+  requires: [diffeo2d, diffeo2dds, diffeo2dds_learn, contracts, bootstrapping_olympics,
+    diffeo]
+  src: ../../src/diffeo/src/diffeo2dds_sim
+diffeo2s:
+  id_package: diffeo2s
+  repo: diffeo
+  required_by: [procgraph_diffeo, diffeo2d, diffeo2dds, diffeoplan, diffeo]
+  requires: [reprep, diffeo2d, quickapp, contracts, diffeoplan, geometry, diffeo,
+    conf_tools]
+  src: ../../src/diffeo/src/diffeo2s
+diffeo_agents:
+  id_package: diffeo_agents
+  repo: diffeo
+  required_by: []
+  requires: [diffeo2d, diffeo2dds, diffeo2dds_learn, contracts, boot_agents, bootstrapping_olympics,
+    diffeo]
+  src: ../../src/diffeo/src/diffeo_agents
 diffeoplan:
   id_package: diffeoplan
-  repo: surf12adam
-  required_by: [learner, boot_agents]
-  requires: [reprep, procgraph_pil, ggs, procgraph, quickapp, compmake, contracts,
-    boot_agents, bootstrapping_olympics, geometry, conf_tools]
-  src: ../src/surf12adam/src/diffeoplan
+  repo: diffeoplan
+  required_by: [procgraph_diffeo, dptr1, diffeoplan_agent, diffeo2s, learner, diffeo2dds,
+    misc]
+  requires: [reprep, procgraph_pil, diffeo2s, diffeo2d, procgraph, quickapp, compmake,
+    ggs, diffeo2dds, diffeo2dds_learn, contracts, boot_agents, bootstrapping_olympics,
+    geometry, diffeo, conf_tools]
+  src: ../../src/diffeoplan/src/diffeoplan
+diffeoplan_agent:
+  id_package: diffeoplan_agent
+  repo: diffeoplan
+  required_by: []
+  requires: [reprep, contracts, boot_agents, diffeoplan, bootstrapping_olympics, diffeo,
+    conf_tools]
+  src: ../../src/diffeoplan/src/diffeoplan_agent
+dptr1:
+  id_package: dptr1
+  repo: diffeoplan
+  required_by: []
+  requires: [diffeo2d, quickapp, diffeo2dds, diffeo2dds_learn, diffeoplan, diffeo,
+    conf_tools]
+  src: ../../src/diffeoplan/src/dptr1
+genblocks:
+  id_package: genblocks
+  repo: typsy
+  required_by: [typsy_boot, typsy_geometry, typsy]
+  requires: [contracts, typsy]
+  src: ../../src/typsy/src/genblocks
 geometry:
   id_package: geometry
   repo: geometry
-  required_by: [boot_reports, vehicles_boot, procgraph_vehicles, vehicles_cairo, rosstream2boot,
-    procgraph_robotics, boot_agents, diffeoplan, bootstrapping_olympics, vehicles]
+  required_by: [yc1304, vehicles_boot, diffeo2s, diffeo2d, procgraph_vehicles, vehicles_cairo,
+    rosstream2boot, diffeo2dds, procgraph_robotics, boot_agents, diffeoplan, bootstrapping_olympics,
+    vehicles]
   requires: [contracts]
-  src: ../src/geometry/src/geometry
+  src: ../../src/geometry/src/geometry
 ggs:
   id_package: ggs
-  repo: surf12adam
+  repo: diffeoplan
   required_by: [diffeoplan]
   requires: [reprep, contracts]
-  src: ../src/surf12adam/src/ggs
+  src: ../../src/diffeoplan/src/ggs
 latex_gen:
   id_package: latex_gen
   repo: latex_gen
   required_by: [boot_reports]
   requires: [contracts]
-  src: ../src/latex_gen/src/latex_gen
+  src: ../../src/latex_gen/src/latex_gen
 learner:
   id_package: learner
   repo: surf12adam
   required_by: []
   requires: [reprep, procgraph_pil, procgraph, compmake, contracts, boot_agents, diffeoplan,
-    bootstrapping_olympics, conf_tools]
-  src: ../src/surf12adam/src/learner
+    bootstrapping_olympics, diffeo, conf_tools]
+  src: ../../src/surf12adam/src/learner
+misc:
+  id_package: misc
+  repo: diffeoplan
+  required_by: [procgraph_robotics, contracts, vehicles]
+  requires: [reprep, quickapp, compmake, diffeoplan, diffeo]
+  src: ../../src/diffeoplan/src/misc
 procgraph:
   id_package: procgraph
   repo: procgraph
-  required_by: [procgraph_hdf, procgraph_pil, procgraph_numpy_ops, procgraph_mpl,
-    procgraph_vehicles, learner, procgraph_io_misc, procgraph_signals, procgraph_mplayer,
-    rosstream2boot, procgraph_robotics, procgraph_statistics, procgraph_cv, boot_agents,
-    diffeoplan, bootstrapping_olympics, procgraph_yaml, procgraph_ros, procgraph_foo,
-    procgraph_images]
+  required_by: [procgraph_diffeo, yc1304, procgraph_hdf, procgraph_pil, procgraph_numpy_ops,
+    procgraph_b2r2b, procgraph_mpl, procgraph_vehicles, learner, procgraph_io_misc,
+    procgraph_signals, procgraph_mplayer, rosstream2boot, diffeo2dds, procgraph_robotics,
+    procgraph_statistics, diffeo2dds_learn, procgraph_cv, procgraph_boot, diffeoplan,
+    bootstrapping_olympics, procgraph_yaml, procgraph_ros, procgraph_foo, procgraph_images]
   requires: [procgraph_hdf, procgraph_pil, procgraph_numpy_ops, procgraph_mpl, procgraph_io_misc,
     procgraph_signals, procgraph_mplayer, procgraph_robotics, procgraph_statistics,
     contracts, procgraph_cv, procgraph_foo, procgraph_images]
-  src: ../src/procgraph/src/procgraph
+  src: ../../src/procgraph/src/procgraph
+procgraph_b2r2b:
+  id_package: procgraph_b2r2b
+  repo: rosstream2boot
+  required_by: [yc1304]
+  requires: [procgraph, rosstream2boot, contracts, bootstrapping_olympics]
+  src: ../../src/rosstream2boot/src/procgraph_b2r2b
+procgraph_boot:
+  id_package: procgraph_boot
+  repo: boot_olympics
+  required_by: [yc1304, procgraph_vehicles]
+  requires: [reprep, procgraph, contracts, bootstrapping_olympics, procgraph_images]
+  src: ../../src/boot_olympics/src/procgraph_boot
 procgraph_cv:
   id_package: procgraph_cv
   repo: procgraph
-  required_by: [procgraph]
+  required_by: [procgraph_diffeo, procgraph, diffeo2dds_learn]
   requires: [procgraph]
-  src: ../src/procgraph/src/procgraph_cv
+  src: ../../src/procgraph/src/procgraph_cv
+procgraph_diffeo:
+  id_package: procgraph_diffeo
+  repo: diffeo
+  required_by: []
+  requires: [procgraph_pil, diffeo2s, diffeo2d, procgraph, contracts, procgraph_cv,
+    boot_agents, diffeoplan, bootstrapping_olympics, procgraph_ros, diffeo, conf_tools,
+    procgraph_images]
+  src: ../../src/diffeo/src/procgraph_diffeo
 procgraph_foo:
   id_package: procgraph_foo
   repo: procgraph
   required_by: [procgraph]
-  requires: [procgraph]
-  src: ../src/procgraph/src/procgraph_foo
+  requires: [blocks, procgraph]
+  src: ../../src/procgraph/src/procgraph_foo
 procgraph_hdf:
   id_package: procgraph_hdf
   repo: procgraph
   required_by: [procgraph, bootstrapping_olympics]
   requires: [procgraph]
-  src: ../src/procgraph/src/procgraph_hdf
+  src: ../../src/procgraph/src/procgraph_hdf
 procgraph_images:
   id_package: procgraph_images
   repo: procgraph
-  required_by: [procgraph_mpl, procgraph_vehicles, procgraph, procgraph_mplayer, rosstream2boot,
-    procgraph_robotics, boot_agents]
+  required_by: [procgraph_diffeo, yc1304, procgraph_mpl, procgraph_vehicles, procgraph,
+    procgraph_mplayer, rosstream2boot, procgraph_robotics, procgraph_boot]
   requires: [procgraph, contracts, conf_tools]
-  src: ../src/procgraph/src/procgraph_images
+  src: ../../src/procgraph/src/procgraph_images
 procgraph_io_misc:
   id_package: procgraph_io_misc
   repo: procgraph
   required_by: [procgraph]
   requires: [procgraph]
-  src: ../src/procgraph/src/procgraph_io_misc
+  src: ../../src/procgraph/src/procgraph_io_misc
 procgraph_mpl:
   id_package: procgraph_mpl
   repo: procgraph
-  required_by: [procgraph, procgraph_mplayer, procgraph_robotics]
+  required_by: [yc1304, procgraph, procgraph_mplayer, procgraph_robotics]
   requires: [procgraph_pil, procgraph, procgraph_images]
-  src: ../src/procgraph/src/procgraph_mpl
+  src: ../../src/procgraph/src/procgraph_mpl
 procgraph_mplayer:
   id_package: procgraph_mplayer
   repo: procgraph
-  required_by: [procgraph]
+  required_by: [yc1304, procgraph]
   requires: [reprep, procgraph_pil, procgraph_mpl, procgraph, contracts, procgraph_images]
-  src: ../src/procgraph/src/procgraph_mplayer
+  src: ../../src/procgraph/src/procgraph_mplayer
 procgraph_numpy_ops:
   id_package: procgraph_numpy_ops
   repo: procgraph
   required_by: [procgraph]
   requires: [procgraph]
-  src: ../src/procgraph/src/procgraph_numpy_ops
+  src: ../../src/procgraph/src/procgraph_numpy_ops
 procgraph_pil:
   id_package: procgraph_pil
   repo: procgraph
-  required_by: [procgraph_mpl, learner, procgraph, procgraph_mplayer, diffeoplan]
+  required_by: [procgraph_diffeo, yc1304, procgraph_mpl, learner, procgraph, procgraph_mplayer,
+    rosstream2boot, diffeo2dds, diffeoplan]
   requires: [procgraph]
-  src: ../src/procgraph/src/procgraph_pil
+  src: ../../src/procgraph/src/procgraph_pil
 procgraph_robotics:
   id_package: procgraph_robotics
   repo: procgraph
   required_by: [procgraph]
-  requires: [procgraph_mpl, procgraph, geometry, procgraph_images]
-  src: ../src/procgraph/src/procgraph_robotics
+  requires: [procgraph_mpl, procgraph, misc, geometry, procgraph_images]
+  src: ../../src/procgraph/src/procgraph_robotics
 procgraph_ros:
   id_package: procgraph_ros
   repo: procgraph
-  required_by: [procgraph_vehicles, rosstream2boot, boot_agents, bootstrapping_olympics]
-  requires: [procgraph, contracts]
-  src: ../src/procgraph/src/procgraph_ros
+  required_by: [procgraph_diffeo, yc1304, procgraph_vehicles, rosstream2boot, bootstrapping_olympics]
+  requires: [rosbag_utils, procgraph, contracts]
+  src: ../../src/procgraph/src/procgraph_ros
 procgraph_signals:
   id_package: procgraph_signals
   repo: procgraph
   required_by: [procgraph]
   requires: [procgraph]
-  src: ../src/procgraph/src/procgraph_signals
+  src: ../../src/procgraph/src/procgraph_signals
 procgraph_statistics:
   id_package: procgraph_statistics
   repo: procgraph
   required_by: [procgraph]
   requires: [procgraph]
-  src: ../src/procgraph/src/procgraph_statistics
+  src: ../../src/procgraph/src/procgraph_statistics
 procgraph_vehicles:
   id_package: procgraph_vehicles
   repo: vehicles
   required_by: [bootstrapping_olympics]
-  requires: [procgraph, vehicles_cairo, cairo_utils, geometry, vehicles, procgraph_yaml,
-    procgraph_ros, procgraph_images]
-  src: ../src/vehicles/src/procgraph_vehicles
+  requires: [procgraph, vehicles_cairo, cairo_utils, procgraph_boot, geometry, vehicles,
+    procgraph_yaml, procgraph_ros, procgraph_images]
+  src: ../../src/vehicles/src/procgraph_vehicles
 procgraph_yaml:
   id_package: procgraph_yaml
   repo: procgraph
   required_by: [procgraph_vehicles]
   requires: [procgraph]
-  src: ../src/procgraph/src/procgraph_yaml
+  src: ../../src/procgraph/src/procgraph_yaml
 quickapp:
   id_package: quickapp
   repo: quickapp
-  required_by: [rosstream2boot, diffeoplan]
-  requires: [reprep, compmake, contracts, conf_tools]
-  src: ../src/quickapp/src/quickapp
+  required_by: [yc1304, dptr1, diffeo2s, quickapp_boot, comptests, rosstream2boot,
+    diffeo2dds, diffeo2dds_learn, misc, diffeoplan, diffeo]
+  requires: [reprep, compmake, decent_params, contracts, conf_tools]
+  src: ../../src/quickapp/src/quickapp
+quickapp_boot:
+  id_package: quickapp_boot
+  repo: boot_olympics
+  required_by: [yc1304]
+  requires: [quickapp, contracts, bootstrapping_olympics]
+  src: ../../src/boot_olympics/src/quickapp_boot
 raytracer:
   id_package: raytracer
   repo: vehicles
   required_by: [vehicles]
   requires: [contracts]
-  src: ../src/vehicles/src/raytracer
+  src: ../../src/vehicles/src/raytracer
 reprep:
   id_package: reprep
   repo: reprep
-  required_by: [boot_reports, vehicles_boot, ggs, learner, quickapp, procgraph_mplayer,
-    boot_agents, diffeoplan, bootstrapping_olympics, vehicles]
+  required_by: [boot_reports, yc1304, diffeoplan_agent, diffeo2d_learn, vehicles_boot,
+    diffeo2s, diffeo2d, learner, quickapp, ggs, procgraph_mplayer, diffeo2dds, diffeo2dds_learn,
+    misc, boot_agents, procgraph_boot, diffeoplan, bootstrapping_olympics, vehicles]
   requires: [contracts]
-  src: ../src/reprep/src/reprep
+  src: ../../src/reprep/src/reprep
+ros_node_utils:
+  id_package: ros_node_utils
+  repo: ros_node_utils
+  required_by: [rosstream2boot, diffeo2dds_learn_rosbag]
+  requires: []
+  src: ../../src/ros_node_utils/src/ros_node_utils
+rosbag_utils:
+  id_package: rosbag_utils
+  repo: ros_node_utils
+  required_by: [rosstream2boot, procgraph_ros]
+  requires: [contracts, conf_tools]
+  src: ../../src/ros_node_utils/src/rosbag_utils
 rosstream2boot:
   id_package: rosstream2boot
   repo: rosstream2boot
+  required_by: [yc1304, procgraph_b2r2b, b2r2b_youbot]
+  requires: [procgraph_pil, rosbag_utils, procgraph, quickapp, ros_node_utils, contracts,
+    bootstrapping_olympics, geometry, procgraph_ros, conf_tools, procgraph_images]
+  src: ../../src/rosstream2boot/src/rosstream2boot
+typsy:
+  id_package: typsy
+  repo: typsy
+  required_by: [typsy_boot, typsy_dynamics, blocks, typsy_configuration, genblocks,
+    typsy_geometry]
+  requires: [contracts, genblocks]
+  src: ../../src/typsy/src/typsy
+typsy_boot:
+  id_package: typsy_boot
+  repo: typsy
   required_by: []
-  requires: [procgraph, quickapp, contracts, bootstrapping_olympics, geometry, procgraph_ros,
-    conf_tools, procgraph_images]
-  src: ../src/rosstream2boot/src/rosstream2boot
+  requires: [contracts, genblocks, typsy]
+  src: ../../src/typsy/src/typsy_boot
+typsy_configuration:
+  id_package: typsy_configuration
+  repo: typsy
+  required_by: []
+  requires: [contracts, typsy]
+  src: ../../src/typsy/src/typsy_configuration
+typsy_dynamics:
+  id_package: typsy_dynamics
+  repo: typsy
+  required_by: [blocks]
+  requires: [typsy]
+  src: ../../src/typsy/src/typsy_dynamics
+typsy_geometry:
+  id_package: typsy_geometry
+  repo: typsy
+  required_by: []
+  requires: [contracts, genblocks, typsy]
+  src: ../../src/typsy/src/typsy_geometry
+typsy_probability:
+  id_package: typsy_probability
+  repo: typsy
+  required_by: []
+  requires: []
+  src: ../../src/typsy/src/typsy_probability
 vehicles:
   id_package: vehicles
   repo: vehicles
-  required_by: [boot_reports, vehicles_boot, boot_gui, procgraph_vehicles, vehicles_cairo,
-    boot_agents, bootstrapping_olympics]
-  requires: [reprep, vehicles_cairo, contracts, bootstrapping_olympics, geometry,
+  required_by: [boot_reports, vehicles_boot, procgraph_vehicles, vehicles_cairo, diffeo2dds,
+    bootstrapping_olympics]
+  requires: [reprep, vehicles_cairo, contracts, misc, bootstrapping_olympics, geometry,
     conf_tools, raytracer]
-  src: ../src/vehicles/src/vehicles
+  src: ../../src/vehicles/src/vehicles
 vehicles_boot:
   id_package: vehicles_boot
   repo: vehicles
   required_by: []
   requires: [reprep, contracts, bootstrapping_olympics, geometry, vehicles]
-  src: ../src/vehicles/src/vehicles_boot
+  src: ../../src/vehicles/src/vehicles_boot
 vehicles_cairo:
   id_package: vehicles_cairo
   repo: vehicles
   required_by: [procgraph_vehicles, bootstrapping_olympics, vehicles]
   requires: [cairo_utils, contracts, geometry, vehicles, conf_tools]
-  src: ../src/vehicles/src/vehicles_cairo
+  src: ../../src/vehicles/src/vehicles_cairo
+yc1304:
+  id_package: yc1304
+  repo: yc1304
+  required_by: []
+  requires: [reprep, procgraph_pil, procgraph_b2r2b, procgraph_mpl, procgraph, quickapp,
+    compmake, quickapp_boot, procgraph_mplayer, rosstream2boot, contracts, boot_agents,
+    procgraph_boot, bootstrapping_olympics, geometry, procgraph_ros, conf_tools, procgraph_images]
+  src: ../../src/yc1304/src/yc1304

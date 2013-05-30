@@ -15,47 +15,57 @@ def load_data():
     
 def main():
     pkgs = load_data()
-    pkgs['bootstrapping_olympics']['requires'].remove('vehicles')
-    pkgs['bootstrapping_olympics']['requires'].remove('procgraph_vehicles')
-    pkgs['bootstrapping_olympics']['requires'].remove('vehicles_cairo')
-    pkgs['boot_agents']['requires'].remove('vehicles')
+#    pkgs['bootstrapping_olympics']['requires'].remove('vehicles')
+ #   pkgs['bootstrapping_olympics']['requires'].remove('procgraph_vehicles')
+ #   pkgs['bootstrapping_olympics']['requires'].remove('vehicles_cairo')
+ #   pkgs['boot_agents']['requires'].remove('vehicles')
 
     plot_pkgs(pkgs)
 
 def plot_pkgs(pkgs, ignore_repo=['contracts'], cluster=False):
     graph = gvgen.GvGen()
-
+    repo2node = {}
     pkg2node = {}
 
-    if cluster:
-        repo2node = {}
-        for id_pkg, pkg in pkgs.items():
-            repo = pkg['repo']
-            if repo in ignore_repo:
-                continue
-            if not repo in repo2node:
-                repo2node[repo] = graph.newItem(repo)
+    def get_repo_node(repo):
+        if not repo in repo2node:
+            repo2node[repo] = graph.newItem(repo)
+        return repo2node[repo] 
+
+    def get_pkg_node(id_pkg):
+        if not id_pkg in pkg2node:
+            if cluster:
+                pkg2node[id_pkg] = graph.newItem(id_pkg, repo2node[repo])
+            else:
+                pkg2node[id_pkg] = graph.newItem(id_pkg)        
+        return pkg2node[id_pkg]
 
 
-    if cluster:
-        pkg2node['procgraph'] = graph.newItem('procgraph', repo2node['procgraph'])
-    else:
-        pkg2node['procgraph'] = graph.newItem('procgraph')
+    # if cluster:
+    #     repo2node = {}
+    #     for id_pkg, pkg in pkgs.items():
+    #         repo = pkg['repo']
+    #         if repo in ignore_repo:
+    #             continue
+    #         if not repo in repo2node:
+    #             repo2node[repo] = graph.newItem(repo)
+
+
+    # if cluster:
+    #     pkg2node['procgraph'] = graph.newItem('procgraph', repo2node['procgraph'])
+    # else:
+    #     pkg2node['procgraph'] = graph.newItem('procgraph')
     
-
 
     for id_pkg, pkg in pkgs.items():
         repo = pkg['repo']
         if repo in ignore_repo:
             continue
 
-        if repo == 'procgraph':
-            pkg2node[id_pkg]  = pkg2node['procgraph']
-        else:
-            if cluster:
-                pkg2node[id_pkg] = graph.newItem(id_pkg, repo2node[repo])
-            else:
-                pkg2node[id_pkg] = graph.newItem(id_pkg)
+        # if repo == 'procgraph':
+        #     pkg2node[id_pkg]  = pkg2node['procgraph']
+        # else:
+        get_pkg_node(id_pkg)
 
     for id_pkg, pkg in pkgs.items():
         for child in pkg['requires']:
@@ -64,7 +74,7 @@ def plot_pkgs(pkgs, ignore_repo=['contracts'], cluster=False):
                 continue
             same_repo = pkgs[id_pkg]['repo'] == child_repo
             if not same_repo:
-                graph.newLink(pkg2node[id_pkg], pkg2node[child])
+                graph.newLink(get_pkg_node(id_pkg), get_pkg_node(child))
 
     # TODO: add check?
     out = 'deps.dot'
