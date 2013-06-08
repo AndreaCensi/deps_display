@@ -22,7 +22,7 @@ def main():
 
     plot_pkgs(pkgs)
 
-def plot_pkgs(pkgs, ignore_repo=['contracts'], cluster=False):
+def plot_pkgs(pkgs, ignore_repo=[], cluster=False):
     graph = gvgen.GvGen()
     repo2node = {}
     pkg2node = {}
