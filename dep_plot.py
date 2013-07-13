@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import itertools
-from os.path import join,exists,isdir, basename
+from os.path import join, exists, isdir, basename
 import os
 import yaml
 import gvgen
@@ -10,7 +10,7 @@ from procgraph.utils import system_cmd_result
 
 def load_data():
     f = 'deps.yaml'
-    pkgs =  list(yaml.load_all(open(f)))[0]
+    pkgs = list(yaml.load_all(open(f)))[0]
     return pkgs
     
 def main():
@@ -69,9 +69,12 @@ def plot_pkgs(pkgs, ignore_repo=[], cluster=False):
 
     for id_pkg, pkg in pkgs.items():
         for child in pkg['requires']:
-            child_repo = pkgs[child]['repo']
-            if child_repo in ignore_repo:
-                continue
+            if not child in pkgs:
+                print('warning, %s dependence %s not found in list' % (id_pkg, child))
+            else:    
+                child_repo = pkgs[child]['repo']
+                if child_repo in ignore_repo:
+                    continue
             same_repo = pkgs[id_pkg]['repo'] == child_repo
             if not same_repo:
                 graph.newLink(get_pkg_node(id_pkg), get_pkg_node(child))
