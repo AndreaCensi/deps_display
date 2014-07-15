@@ -140,26 +140,4 @@ def requires(p1, p2):
     return False
 
 
-
-    # graph = gvgen.GvGen()
-
-    # pkg2node = {}
-    # for id_pkg, pkg in pkgs.items():
-    #     pkg2node[id_pkg] = graph.newItem(id_pkg)
-
-    # for id_pkg, pkg in pkgs.items():
-    #     print('%10s requires %10s' % (id_pkg, pkg['requires']))
-    #     print('%10s required by %10s' % (id_pkg, pkg['required_by']))
-
-    #     for child in pkg['requires']:
-    #         graph.newLink(pkg2node[id_pkg], pkg2node[child])
-
-
-    # # TODO: add check?
-    # out = 'deps.dot'
-    # with open(out, 'w') as f:
-    #     graph.dot(f)
-
-    # cmd = ['dot', out, '-Tpng', '-o', out + '.png']
-    # system_cmd_result('.', cmd, raise_on_error=True)
-
+ 

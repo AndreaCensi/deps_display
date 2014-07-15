@@ -139,8 +139,9 @@ def plot_pkgs(pkgs, out, ignore_repo=[], cluster=False,
                 child_repo = pkgs[child]['repo']
                 if child_repo in ignore_repo:
                     continue
+                
             same_repo = pkgs[id_pkg]['repo'] == child_repo
-#             if not same_repo:
+            
             if link_same_repo or not same_repo:
                 l = graph.newLink(get_pkg_node(id_pkg), get_pkg_node(child))
                 
