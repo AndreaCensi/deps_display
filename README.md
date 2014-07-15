@@ -27,6 +27,7 @@ See below for some examples, contained in the [``example-output`` directory][exa
 [example-output]: example-output/
 [example-resources]: https://github.com/AndreaCensi/env_fault/blob/master/resources.yaml
 
-<img src='example-output/all.png?raw=true'/>
-<img src='example-output/cluster.png?raw=true'/>
-<img src='example-output/clearer.png'/>
+
+<a href='example-output/all.png'><img src='example-output/all.png'/></a>
+<a href='example-output/cluster.png'><img src='example-output/cluster.png'/></a>
+<a href='example-output/clearer.png'><img src='example-output/clearer.png'/></a>
