@@ -1,3 +1,4 @@
 deps.dot
 test-deps
 *.egg-info
+*.pyc
